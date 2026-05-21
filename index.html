@@ -8,14 +8,81 @@
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <title>Task List</title>
 
-
   <style>
     .centerMiddle {
       margin: auto;
       width: 60%;
-      padding-top: 100px;;
+      padding-top: 100px;
     }
-    </style>
+    .task-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      width: 100%;
+    }
+    .task-title {
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+    }
+    .toggle-arrow {
+      margin-right: 10px;
+      transition: transform 0.3s;
+    }
+    .toggle-arrow.collapsed {
+      transform: rotate(-90deg);
+    }
+    .subtask-container {
+      margin-left: 20px;
+      margin-top: 10px;
+      display: none;
+    }
+    .subtask-container.show {
+      display: block;
+    }
+    .subtask-list {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+    .subtask-item {
+      padding: 8px 12px;
+      background-color: #f5f5f5;
+      margin: 5px 0;
+      border-radius: 3px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .subtask-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .add-subtask-form {
+      margin-top: 10px;
+      margin-left: 20px;
+      display: none;
+    }
+    .add-subtask-form.show {
+      display: block;
+    }
+    .btn-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .btn-small {
+      padding: 4px 12px;
+      font-size: 12px;
+    }
+    .subtask-input {
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      width: 200px;
+    }
+  </style>
 </head>
 <body>
   <div class="container centerMiddle">
