@@ -79,14 +79,8 @@ function renderTask(task) {
   removeBtn.style.marginRight = '5px';
   removeBtn.title = 'Remove Task';
 
-  const deleteBtn = document.createElement('a');
-  deleteBtn.className = 'delete-item';
-  deleteBtn.innerHTML = '<i class="fa fa-remove"></i>';
-  deleteBtn.dataset.taskId = task.id;
-
   actions.appendChild(addSubtaskBtn);
   actions.appendChild(removeBtn);
-  actions.appendChild(deleteBtn);
 
   taskHeader.appendChild(taskTitle);
   taskHeader.appendChild(actions);
@@ -119,14 +113,7 @@ function renderTask(task) {
       removeSubtaskBtn.setAttribute('data-subtask-id', subtask.id);
       removeSubtaskBtn.title = 'Remove Sub-task';
 
-      const deleteSubtaskBtn = document.createElement('a');
-      deleteSubtaskBtn.className = 'delete-subtask';
-      deleteSubtaskBtn.innerHTML = '<i class="fa fa-remove"></i>';
-      deleteSubtaskBtn.setAttribute('data-task-id', task.id);
-      deleteSubtaskBtn.setAttribute('data-subtask-id', subtask.id);
-
       subtaskActions.appendChild(removeSubtaskBtn);
-      subtaskActions.appendChild(deleteSubtaskBtn);
 
       subtaskItem.appendChild(subtaskText);
       subtaskItem.appendChild(subtaskActions);
@@ -171,11 +158,6 @@ function renderTask(task) {
     removeTask(task.id);
   });
 
-  deleteBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    removeTask(task.id);
-  });
-
   submitBtn.addEventListener('click', (e) => {
     e.preventDefault();
     const input = addSubtaskForm.querySelector('.subtask-input');
@@ -183,14 +165,6 @@ function renderTask(task) {
       addSubtask(task.id, input.value);
       input.value = '';
     }
-  });
-
-  const deleteSubtaskBtns = li.querySelectorAll('.delete-subtask');
-  deleteSubtaskBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      removeSubtask(btn.getAttribute('data-task-id'), btn.getAttribute('data-subtask-id'));
-    });
   });
 
   const removeSubtaskBtns = li.querySelectorAll('button[data-subtask-id]');
