@@ -42,37 +42,42 @@ function renderTask(task) {
 
   const taskTitle = document.createElement('div');
   taskTitle.className = 'task-title';
-  taskTitle.style.cursor = 'pointer';
 
-  const arrow = document.createElement('span');
-  arrow.className = 'toggle-arrow collapsed';
-  arrow.innerHTML = '▼';
-  arrow.style.cursor = 'pointer';
+  const hasSubtasks = task.subtasks && task.subtasks.length > 0;
+
+  if (hasSubtasks) {
+    taskTitle.style.cursor = 'pointer';
+    const arrow = document.createElement('span');
+    arrow.className = 'toggle-arrow collapsed';
+    arrow.innerHTML = '▼';
+    arrow.style.cursor = 'pointer';
+    taskTitle.appendChild(arrow);
+
+    taskTitle.addEventListener('click', () => {
+      toggleSubtasks(task.id, arrow, subtaskContainer);
+    });
+  }
 
   const titleText = document.createElement('span');
   titleText.textContent = task.title;
-
-  taskTitle.appendChild(arrow);
   taskTitle.appendChild(titleText);
-
-  taskTitle.addEventListener('click', () => {
-    toggleSubtasks(task.id, arrow, subtaskContainer);
-  });
 
   const actions = document.createElement('div');
   actions.className = 'btn-actions secondary-content';
 
   const addSubtaskBtn = document.createElement('button');
   addSubtaskBtn.className = 'btn btn-small red';
-  addSubtaskBtn.textContent = '+ Sub';
+  addSubtaskBtn.innerHTML = '<i class="fa fa-plus"></i>';
   addSubtaskBtn.dataset.taskId = task.id;
   addSubtaskBtn.style.marginRight = '5px';
+  addSubtaskBtn.title = 'Add Sub-task';
 
   const removeBtn = document.createElement('button');
   removeBtn.className = 'btn btn-small orange';
-  removeBtn.textContent = 'Remove';
+  removeBtn.innerHTML = '<i class="fa fa-trash"></i>';
   removeBtn.dataset.taskId = task.id;
   removeBtn.style.marginRight = '5px';
+  removeBtn.title = 'Remove Task';
 
   const deleteBtn = document.createElement('a');
   deleteBtn.className = 'delete-item';
@@ -109,9 +114,10 @@ function renderTask(task) {
 
       const removeSubtaskBtn = document.createElement('button');
       removeSubtaskBtn.className = 'btn btn-small orange';
-      removeSubtaskBtn.textContent = 'Remove';
+      removeSubtaskBtn.innerHTML = '<i class="fa fa-trash"></i>';
       removeSubtaskBtn.setAttribute('data-task-id', task.id);
       removeSubtaskBtn.setAttribute('data-subtask-id', subtask.id);
+      removeSubtaskBtn.title = 'Remove Sub-task';
 
       const deleteSubtaskBtn = document.createElement('a');
       deleteSubtaskBtn.className = 'delete-subtask';
@@ -142,9 +148,10 @@ function renderTask(task) {
 
   const submitBtn = document.createElement('button');
   submitBtn.className = 'btn btn-small';
-  submitBtn.textContent = 'Add';
+  submitBtn.innerHTML = '<i class="fa fa-plus"></i>';
   submitBtn.dataset.taskId = task.id;
   submitBtn.style.marginTop = '5px';
+  submitBtn.title = 'Add Sub-task';
 
   addSubtaskForm.appendChild(subtaskInput);
   addSubtaskForm.appendChild(submitBtn);
